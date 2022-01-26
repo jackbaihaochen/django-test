@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test_base</title>
+</head>
+<body>
+    <h1>This is from the base html!</h1>
+    {% block content %}
+        replaced stuff
+    {% endblock %}
+    <br/>
+    ======================================
+    <br/>
+    <ul>
+    {% if request %}
+        this is : {{request}}
+        {% for item in request %}
+            <li>{{forloop.counter}} : {{item}}</li>
+        {% endfor %}
+    {% endif %}
+    </ul>
+</body>
+</html>
