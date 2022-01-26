@@ -6,3 +6,6 @@
 
 # Ignore .env
 .env
+
+# Ignore pycache .pyc files
+*.pyc
