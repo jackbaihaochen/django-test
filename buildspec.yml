@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  secrets-manager:
+    SECRET_KEY: "django_secret_key:SECRET_KEY"
+
 batch:
   fast-fail: true
         
