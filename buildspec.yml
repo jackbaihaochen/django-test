@@ -9,7 +9,6 @@ phases:
     runtime-versions:
       python: 3.x
     commands:
-      - yum update -y
       - yum install python3 -y
   pre_build:
     on-failure: ABORT
