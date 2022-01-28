@@ -16,6 +16,8 @@ Including another URLconf
 from django.urls import path
 from . import views
 
+app_name = "line_bot"
 urlpatterns = [
-    path('', views.index , name = "name"),
+    path('', views.index , name = "home"),
+    path('send_message', views.send_message_to_one, name = "send_message_to_one")
 ]

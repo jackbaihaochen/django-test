@@ -9,3 +9,6 @@
 
 # Ignore pycache .pyc files
 *.pyc
+
+# Ignore secret files
+*.key

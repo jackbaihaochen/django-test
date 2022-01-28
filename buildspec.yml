@@ -1,0 +1,25 @@
+version: 0.2
+
+batch:
+  fast-fail: true
+        
+phases:
+  install:
+    on-failure: ABORT
+    runtime-versions:
+      python: 3.x
+    commands:
+      - yum update -y
+      - yum install python3 -y
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - pip3 install -r requirements.txt
+  build:
+    on-failure: ABORT
+    commands:
+      - gunicorn myproject.wsgi
+  post_build:
+    on-failure: ABORT
+    commands:
+      - echo Build completed on `date`
