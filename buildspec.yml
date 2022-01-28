@@ -14,6 +14,7 @@ phases:
       python: 3.x
     commands:
       - yum install python3 -y
+      - yum install SQLite -y
   pre_build:
     on-failure: ABORT
     commands:
