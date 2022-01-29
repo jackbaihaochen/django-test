@@ -4,7 +4,8 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.urls import reverse
 from django.contrib import messages
 from line_bot.line_bot import LineAuth, LineBot
-
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 USER_ID = 'bai.jack@jackbai'
 DOMAIN_ID = '500023959'
@@ -21,6 +22,7 @@ def index(request, *args, **kwargs):
 
 
 # The following methods are of special functions
+# Send message to a certain user.
 def send_message_to_one(request):
     try:
         user_id = request.POST.get('user_id')
@@ -32,4 +34,12 @@ def send_message_to_one(request):
     messages.success(request, 'Succeeded!') if send_message_response else messages.error(request, 'Failed!')
     return HttpResponseRedirect(reverse('line_bot:home'))
 
-
+# Repeat what the user sends.
+@method_decorator(csrf_exempt, name='callback')
+def repeat_reply(request):
+    print(request)
+    received = request.POST.dict()
+    user_id = received['source']['userId']
+    msg = received['content']['text']
+    print(user_id,msg)
+    TEST_BOT.send_message_to_one(USER_ID, msg)
