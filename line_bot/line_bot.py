@@ -70,6 +70,7 @@ class LineAuth():
     # Get Access Token from DB.
     def get_access_token_from_db(self):
         db_access_token = False
+        db_refresh_token = False
         line_auth_info_set = LineAuthInfo.objects.all()
         # check if token is stored in DB
         if(line_auth_info_set.exists()):
@@ -125,21 +126,34 @@ class LineAuth():
 
         # update/insert data into DB
         line_auth_info_set = LineAuthInfo.objects.all()
-        db_access_token = line_auth_info_set.get(key = 'access_token')
-        db_access_token_expires_time = line_auth_info_set.get(key = 'access_token_expires_time')
-        db_access_token.value = access_token
-        db_access_token_expires_time.value = access_token_expires_time
-        db_access_token.save()
-        db_access_token_expires_time.save()
+        # if data exists, update; if doesn't, create.
+        db_access_token = line_auth_info_set.update_or_create(
+            key = 'access_token',
+            defaults = {
+                'value': access_token,
+            }
+        )
+        db_access_token_expires_time = line_auth_info_set.update_or_create(
+            key = 'access_token_expires_time',
+            defaults = {
+                'value': access_token_expires_time,
+            }
+        )
         # If there is a refresh token, then save it. If the access token is retrieved through refresh token, then the response will not contain refresh token.
         if(refresh_token):
-            db_refresh_token = line_auth_info_set.get(key = 'refresh_token')
-            db_refresh_token.value = refresh_token
-            db_refresh_token.save()
+            db_refresh_token = line_auth_info_set.update_or_create(
+                key = 'refresh_token',
+                defaults = {
+                    'value': refresh_token,
+                }
+            )
             refresh_token_expires_time = datetime.fromtimestamp(int(datetime.now().timestamp() + int(60*60*24*90)))
-            db_refresh_token_expires_time = line_auth_info_set.get(key = 'refresh_token_expires_time')
-            db_refresh_token_expires_time.value = refresh_token_expires_time
-            db_refresh_token_expires_time.save()
+            db_refresh_token_expires_time = line_auth_info_set.update_or_create(
+                key = 'refresh_token_expires_time',
+                defaults = {
+                    'value': refresh_token_expires_time,
+                }
+            )
         print('Access Token saved to DB.')
         return access_token
 
