@@ -2,7 +2,13 @@ version: 0.2
 
 env:
   secrets-manager:
-    SECRET_KEY: "django_secret_key:SECRET_KEY"
+    SECRET_KEY: "django_secret_key:DJANGO_SECRET_KEY"
+    DB_PASSWORD: "django_secret_key:DJANGO_DB_PASSWORD"
+  variables:
+    DB_NAME: "django"
+    DB_USER: "admin"
+    DB_HOST: "django.camau3gpp4an.us-east-1.rds.amazonaws.com"
+    DB_PORT: "3306"
 
 batch:
   fast-fail: true
