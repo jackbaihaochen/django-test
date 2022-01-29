@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 environ.Env.read_env('../.env')
 # API
-API_ID = 'jp2nSdmaqsgFW'
+API_ID = 'piM8dniNdZRC0EZhpdRz'
 
 # class for Line Auth
 class LineAuth():
@@ -225,10 +225,7 @@ class OldLineBot():
     # register the bot
     def register_bot(self):
         url = 'https://apis.worksmobile.com/r/' + API_ID + '/message/v1/bot'
-        headers = {
-            'Content-Type': 'application/json',
-            'charset':'UTF-8',
-        }
+        print('Register url is: ' + url)
         data = {
             "name": "echo bot",
             "photoUrl": "https://developers.worksmobile.com/favicon.png",
