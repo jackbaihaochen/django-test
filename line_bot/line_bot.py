@@ -224,7 +224,7 @@ class LineBot():
 class OldLineBot():
     # register the bot
     def register_bot(self):
-        url = 'https://apis.worksmobile.com/r/' + API_ID + '/message/v1/bot'
+        url = 'https://apis.worksmobile.com/r/' + 'jp2nSdmaqsgFW' + '/message/v1/bot'
         print('Register url is: ' + url)
         data = {
             "name": "echo bot",
