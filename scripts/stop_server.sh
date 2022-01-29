@@ -1,1 +1,1 @@
-pkill gunicorn
+kill -TERM $(ps aux|grep gunicorn| grep django| awk '{ print $2 }')
