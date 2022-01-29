@@ -18,14 +18,10 @@ phases:
     on-failure: ABORT
     runtime-versions:
       python: 3.x
-  pre_build:
-    on-failure: ABORT
-    commands:
-      - pip3 install -r requirements.txt
   build:
     on-failure: ABORT
     commands:
-      - gunicorn test_django.wsgi
+      - pip3 install -r requirements.txt
   post_build:
     on-failure: ABORT
     commands:
