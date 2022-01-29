@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 from django.urls import reverse
 from django.contrib import messages
-from line_bot.line_bot import LineAuth, LineBot
+from line_bot.line_bot import LineAuth, LineBot, OldLineBot
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
@@ -35,7 +35,7 @@ def send_message_to_one(request):
     return HttpResponseRedirect(reverse('line_bot:home'))
 
 # Repeat what the user sends.
-@method_decorator(csrf_exempt, name='callback')
+@method_decorator(csrf_exempt)
 def repeat_reply(request):
     print(request)
     received = request.POST.dict()
@@ -43,3 +43,9 @@ def repeat_reply(request):
     msg = received['content']['text']
     print(user_id,msg)
     TEST_BOT.send_message_to_one(USER_ID, msg)
+
+# Register old bot
+def register_old_bot(request):
+    response = OldLineBot().register_bot()
+    messages.success(request, response)
+    return HttpResponseRedirect(reverse('line_bot:home'))

@@ -17,6 +17,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Initialise environment variables
 env = environ.Env()
 environ.Env.read_env('../.env')
+# API
+API_ID = 'jp2nSdmaqsgFW'
 
 # class for Line Auth
 class LineAuth():
@@ -217,3 +219,25 @@ class LineBot():
         response = requests.post(url=url, data=data, headers=headers).json()
         print('Register signal sent. Response: \n' + json.dumps(response))
         return response
+
+# class for old line bot
+class OldLineBot():
+    # register the bot
+    def register_bot(self):
+        url = 'https://apis.worksmobile.com/r/' + API_ID + '/message/v1/bot'
+        headers = {
+            'Content-Type': 'application/json',
+            'charset':'UTF-8',
+        }
+        data = {
+            "name": "echo bot",
+            "photoUrl": "https://developers.worksmobile.com/favicon.png",
+            "description": "WorksMobile's A.I. conversation enabled bot",
+            "managers": ["bai.jack@jackbai"],
+            'useCallback': True,
+            'callbackUrl': 'https://djangotestbai.herokuapp.com/line/callback',
+            'callbackEvents': ['text'],
+        }
+        response = requests.post(url=url, data=data, headers=headers).json()
+        print('Bot Register signal sent. Response: \n' + json.dumps(response))
+        return json.dumps(response)

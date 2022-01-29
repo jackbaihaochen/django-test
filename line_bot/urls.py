@@ -19,6 +19,7 @@ from . import views
 app_name = "line_bot"
 urlpatterns = [
     path('', views.index , name = "home"),
+    path('register_old_bot', views.register_old_bot, name = "register_old_bot"),
     path('send_message', views.send_message_to_one, name = "send_message_to_one"),
     path('callback', views.repeat_reply, name = 'callback'),
 ]
