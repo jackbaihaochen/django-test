@@ -235,6 +235,6 @@ class OldLineBot():
             'callbackUrl': 'https://djangotestbai.herokuapp.com/line/callback',
             'callbackEvents': ['text'],
         }
-        response = requests.post(url=url, data=data, headers=headers).json()
+        response = requests.post(url=url, data=data).json()
         print('Bot Register signal sent. Response: \n' + json.dumps(response))
         return json.dumps(response)
